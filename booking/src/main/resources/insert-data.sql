@@ -180,12 +180,12 @@ VALUES (1, null, 4, 'Approved', 6, 'Great host!', '2023-01-05 12:00:00'),
 
 
 -- Insert data into the host_properties table
-INSERT INTO host_properties (host_id, properties_id)
-VALUES (1, 1),
-       (2, 2),
-       (3, 3),
-       (4, 4),
-       (5, 5);
+-- INSERT INTO host_properties (host_id, properties_id)
+-- VALUES (1, 1),
+--        (2, 2),
+--        (3, 3),
+--        (4, 4),
+--        (5, 5);
 
 -- Insert data into the reservation table
 INSERT INTO reservation (days, price, accommodation_id, guest_id, host_id, start_date, reservation_status,

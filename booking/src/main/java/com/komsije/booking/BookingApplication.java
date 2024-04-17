@@ -18,7 +18,7 @@ public class BookingApplication {
 
 	public static void main(String[] args) throws FirebaseMessagingException, IOException {
 		SpringApplication.run(BookingApplication.class, args);
-		FirebaseApp.initializeApp(new FirebaseOptions.Builder().setProjectId("booking-team9").setCredentials(GoogleCredentials.getApplicationDefault()).build());
+//		FirebaseApp.initializeApp(new FirebaseOptions.Builder().setProjectId("booking-team9").setCredentials(GoogleCredentials.getApplicationDefault()).build());
 
 	}
 
