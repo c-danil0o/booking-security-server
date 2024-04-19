@@ -42,4 +42,7 @@ public class Account {
     private Set<Review> reviews = new HashSet<>();
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<ConfirmationToken> tokens = new HashSet<>();
+    @Column(nullable = true)
+    private String alias;
+
 }
