@@ -3,16 +3,20 @@ package com.komsije.booking.service;
 import com.komsije.booking.dto.CertificateDto;
 import com.komsije.booking.dto.SignedCertificateDto;
 import com.komsije.booking.exceptions.InvalidDigitalSignatureException;
+import io.grpc.netty.shaded.io.netty.handler.ssl.SslContext;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.net.ssl.KeyManagerFactory;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -24,25 +28,19 @@ import java.security.spec.X509EncodedKeySpec;
 
 @Service
 public class CertificateServiceImpl {
-    private final WebClient webClient;
 
-    public CertificateServiceImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://localhost:8081").build();
-    }
-
-    public CertificateDto downloadCertificate(String alias){
-        SignedCertificateDto certificatePemDTO = sendCertificateDownloadRequest(alias);
+    public CertificateDto checkCertificate(SignedCertificateDto certificateDto){
 
         Cipher cipher = null;
         try {
-            cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher = Cipher.getInstance("RSA/ECB/NOPADDING");
             cipher.init(Cipher.DECRYPT_MODE, getPublicKeyFromPem());
 
-            String hash1 = hashSHA256(certificatePemDTO.getPemCertificate());
-            String hash2 = new String(cipher.doFinal(certificatePemDTO.getDigitalSignature()), StandardCharsets.UTF_8);
+            String hash1 = hashSHA256(certificateDto.getPemCertificate());
+            String hash2 = new String(cipher.doFinal(certificateDto.getDigitalSignature()), StandardCharsets.UTF_8).trim();
 
             if(hash1.equals(hash2)){
-                return new CertificateDto(certificatePemDTO.getPemCertificate());
+                return new CertificateDto(certificateDto.getPemCertificate());
             }else{
                 throw new InvalidDigitalSignatureException("Invalid digital signature");
             }
@@ -77,13 +75,7 @@ public class CertificateServiceImpl {
         return hexString.toString();
     }
 
-    public SignedCertificateDto sendCertificateDownloadRequest(String alias) {
-        return webClient.get()
-                .uri("/certificate/download/"+alias)
-                .retrieve()
-                .bodyToMono(SignedCertificateDto.class)
-                .block();
-    }
+  
 
     public String getPemFile() {
 
