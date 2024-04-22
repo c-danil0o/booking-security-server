@@ -24,4 +24,5 @@ public class HostDto {
     private String lastName;
     @NotNull
     private String phone;
+    private String alias;
 }
