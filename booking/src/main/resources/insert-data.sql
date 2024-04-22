@@ -12,13 +12,12 @@ VALUES ('City1', '123', 'Street A', 45, 29, 'Serbia'),
        ('City10', '707', 'Street J', 45, 29, 'Serbia');
 
 -- Insert data into the account table for hosts
-INSERT INTO account (is_blocked, role, email, password, is_activated)
-VALUES (false, 'Host', 'host1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Host', 'host2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Host', 'host3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Host', 'host4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-
-       (false, 'Host', 'host5@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true);
+INSERT INTO account (is_blocked, role, email, password, is_activated, alias)
+VALUES (false, 'Host', 'host1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '236bce8cd92a49fdab0da508f0188cd8'),
+       (false, 'Host', 'host2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '9004bff2be114199b0e8d1c1c7c35313'),
+       (false, 'Host', 'host3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '06808871e946401c8f12d425a793b7e3'),
+       (false, 'Host', 'host4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 'e323e7191af645c7ba7025e2ba3c25b8'),
+       (false, 'Host', 'host5@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 'b45d692173c644edbb2352d1e4add57f');
 
 -- Insert data into the host table
 INSERT INTO host (address_id, id, first_name, last_name, phone)
