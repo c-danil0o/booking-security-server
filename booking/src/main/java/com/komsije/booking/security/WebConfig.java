@@ -28,6 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        
         for (HttpMessageConverter<?> converter : converters) {
             if (converter instanceof AbstractJackson2HttpMessageConverter) {
                 AbstractJackson2HttpMessageConverter jacksonconverter = (AbstractJackson2HttpMessageConverter) converter;
