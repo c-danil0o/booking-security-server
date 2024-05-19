@@ -1,6 +1,7 @@
 package com.komsije.booking.security;
 
 
+import io.ous.jtoml.impl.Token;
 import jakarta.mail.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.proxy.NoOp;
@@ -94,7 +95,7 @@ public class WebSecurityConfiguration {
                 .anyRequest().authenticated());
 
 //                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-        http.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
+        http.oauth2ResourceServer((oauth2) -> oauth2.jwt(token -> token.jwtAuthenticationConverter(new KeycloakJwtAuthenticationConverter())));
 //        http.oauth2Login(Customizer.withDefaults()).logout((logout) -> logout.addLogoutHandler(keycloakLogoutHandler).logoutSuccessUrl("/3"));
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
@@ -141,43 +142,43 @@ public class WebSecurityConfiguration {
 //
 //    }
 
-    @Bean
-    public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
-        return authorities -> {
-            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
-            var authority = authorities.iterator().next();
-            boolean isOidc = authority instanceof OidcUserAuthority;
-
-            if (isOidc) {
-                var oidcUserAuthority = (OidcUserAuthority) authority;
-                var userInfo = oidcUserAuthority.getUserInfo();
-
-                // Tokens can be configured to return roles under
-                // Groups or REALM ACCESS hence have to check both
-                if (userInfo.hasClaim(REALM_ACCESS_CLAIM)) {
-                    var realmAccess = userInfo.getClaimAsMap(REALM_ACCESS_CLAIM);
-                    var roles = (Collection<String>) realmAccess.get(ROLES_CLAIM);
-                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
-                } else if (userInfo.hasClaim(GROUPS)) {
-                    Collection<String> roles = (Collection<String>) userInfo.getClaim(GROUPS);
-                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
-                }
-            } else {
-                var oauth2UserAuthority = (OAuth2UserAuthority) authority;
-                Map<String, Object> userAttributes = oauth2UserAuthority.getAttributes();
-
-                if (userAttributes.containsKey(REALM_ACCESS_CLAIM)) {
-                    Map<String, Object> realmAccess = (Map<String, Object>) userAttributes.get(REALM_ACCESS_CLAIM);
-                    Collection<String> roles = (Collection<String>) realmAccess.get(ROLES_CLAIM);
-                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
-                }
-            }
-            return mappedAuthorities;
-        };
-    }
-
-    Collection<GrantedAuthority> generateAuthoritiesFromClaim(Collection<String> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(
-                Collectors.toList());
-    }
+//    @Bean
+//    public GrantedAuthoritiesMapper userAuthoritiesMapperForKeycloak() {
+//        return authorities -> {
+//            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+//            var authority = authorities.iterator().next();
+//            boolean isOidc = authority instanceof OidcUserAuthority;
+//
+//            if (isOidc) {
+//                var oidcUserAuthority = (OidcUserAuthority) authority;
+//                var userInfo = oidcUserAuthority.getUserInfo();
+//
+//                // Tokens can be configured to return roles under
+//                // Groups or REALM ACCESS hence have to check both
+//                if (userInfo.hasClaim(REALM_ACCESS_CLAIM)) {
+//                    var realmAccess = userInfo.getClaimAsMap(REALM_ACCESS_CLAIM);
+//                    var roles = (Collection<String>) realmAccess.get(ROLES_CLAIM);
+//                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
+//                } else if (userInfo.hasClaim(GROUPS)) {
+//                    Collection<String> roles = (Collection<String>) userInfo.getClaim(GROUPS);
+//                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
+//                }
+//            } else {
+//                var oauth2UserAuthority = (OAuth2UserAuthority) authority;
+//                Map<String, Object> userAttributes = oauth2UserAuthority.getAttributes();
+//
+//                if (userAttributes.containsKey(REALM_ACCESS_CLAIM)) {
+//                    Map<String, Object> realmAccess = (Map<String, Object>) userAttributes.get(REALM_ACCESS_CLAIM);
+//                    Collection<String> roles = (Collection<String>) realmAccess.get(ROLES_CLAIM);
+//                    mappedAuthorities.addAll(generateAuthoritiesFromClaim(roles));
+//                }
+//            }
+//            return mappedAuthorities;
+//        };
+//    }
+//
+//    Collection<GrantedAuthority> generateAuthoritiesFromClaim(Collection<String> roles) {
+//        return roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(
+//                Collectors.toList());
+//    }
 }
