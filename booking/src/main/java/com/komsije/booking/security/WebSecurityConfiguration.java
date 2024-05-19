@@ -50,8 +50,6 @@ import static org.hibernate.validator.internal.metadata.core.ConstraintHelper.GR
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration {
     @Autowired
-    private JwtRequestFilter jwtRequestFilter;
-    @Autowired
     private static final String GROUPS = "groups";
     private static final String REALM_ACCESS_CLAIM = "realm_access";
     private static final String ROLES_CLAIM = "roles";

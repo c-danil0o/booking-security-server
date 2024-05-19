@@ -4,7 +4,6 @@ import com.komsije.booking.dto.*;
 import com.komsije.booking.exceptions.AccountBlockedException;
 import com.komsije.booking.exceptions.AccountNotActivatedException;
 import com.komsije.booking.model.Role;
-import com.komsije.booking.security.JwtTokenUtil;
 import com.komsije.booking.service.RegistrationServiceImpl;
 import com.komsije.booking.service.interfaces.AccountService;
 import com.komsije.booking.validators.IdentityConstraint;
@@ -37,8 +36,6 @@ public class AccountController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -126,7 +123,7 @@ public class AccountController {
 
         UserDetails userDetail = userDetailsService.loadUserByUsername(loginDto.getEmail());
 
-        String token = jwtTokenUtil.generateToken(userDetail);
+        String token = "";
         TokenDto tokenDto = new TokenDto();
         tokenDto.setToken(token);
 

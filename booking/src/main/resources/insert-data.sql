@@ -12,76 +12,76 @@ VALUES ('City1', '123', 'Street A', 45, 29, 'Serbia'),
        ('City10', '707', 'Street J', 45, 29, 'Serbia');
 
 -- Insert data into the account table for hosts
-INSERT INTO account (is_blocked, role, email, password, is_activated, alias)
-VALUES (false, 'Host', 'host1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '236bce8cd92a49fdab0da508f0188cd8'),
-       (false, 'Host', 'host2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '9004bff2be114199b0e8d1c1c7c35313'),
-       (false, 'Host', 'host3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '06808871e946401c8f12d425a793b7e3'),
-       (false, 'Host', 'host4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 'e323e7191af645c7ba7025e2ba3c25b8'),
-       (false, 'Host', 'host5@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 'b45d692173c644edbb2352d1e4add57f');
+INSERT INTO account (is_blocked, role, email, password, is_activated, alias, id)
+VALUES (false, 'Host', 'host1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '236bce8cd92a49fdab0da508f0188cd8', 7899013227156098000);
+--        (false, 'Host', 'host2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '9004bff2be114199b0e8d1c1c7c35313', 7899013227156098006),
+--        (false, 'Host', 'host3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '06808871e946401c8f12d425a793b7e3', 7899013227156098007),
+--        (false, 'Host', 'host4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 'e323e7191af645c7ba7025e2ba3c25b8', 7899013227156098008),
+--        (false, 'Host', 'host5@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 'b45d692173c644edbb2352d1e4add57f', 7899013227156098009);
 
 -- Insert data into the host table
 INSERT INTO host (address_id, id, first_name, last_name, phone)
-VALUES (1, 1, 'Host', 'One', '+1234567890'),
-       (2, 2, 'Host', 'Two', '+2345678901'),
-       (3, 3, 'Host', 'Three', '+3456789012'),
-       (4, 4, 'Host', 'Four', '+4567890123'),
-       (5, 5, 'Host', 'Five', '+5678901234');
+VALUES (1, 7899013227156098000, 'Host', 'One', '+1234567890');
+--        (2, 7899013227156098006, 'Host', 'Two', '+2345678901'),
+--        (3, 7899013227156098007, 'Host', 'Three', '+3456789012'),
+--        (4, 7899013227156098008, 'Host', 'Four', '+4567890123'),
+--        (5, 7899013227156098009, 'Host', 'Five', '+5678901234');
 
 -- Insert data into the account table for guests
-INSERT INTO account (is_blocked, role, email, password, is_activated)
-VALUES (false, 'Guest', 'guest1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Guest', 'guest2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Guest', 'guest3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Guest', 'guest4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Guest', 'guest5@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true),
-       (false, 'Admin', 'admin@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true);
+INSERT INTO account (is_blocked, role, email, password, is_activated, id)
+VALUES (false, 'Guest', 'guest1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098010);
+--        (false, 'Guest', 'guest2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098020),
+--        (false, 'Guest', 'guest3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098030),
+--        (false, 'Guest', 'guest4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098040),
+--        (false, 'Guest', 'guest5@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098050),
+--        (false, 'Admin', 'admin@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098060);
 
 -- Insert data into the guest table
 INSERT INTO guest (times_cancelled, address_id, id, first_name, last_name, phone)
-VALUES (0, 6, 6, 'Guest', 'One', '+6789012345'),
-       (1, 7, 7, 'Guest', 'Two', '+7890123456'),
-       (2, 8, 8, 'Guest', 'Three', '+8901234567'),
-       (3, 9, 9, 'Guest', 'Four', '+9012345678'),
-       (4, 10, 10, 'Guest', 'Five', '+0123456789');
+VALUES (0, 6, 7899013227156098010, 'Guest', 'One', '+6789012345');
+--        (1, 7, 78990132271560980207, 'Guest', 'Two', '+7890123456'),
+--        (2, 8, 78990132271560980208, 'Guest', 'Three', '+8901234567'),
+--        (3, 9, 78990132271560980409, 'Guest', 'Four', '+9012345678'),
+--        (4, 10, 7899013227156098060, 'Guest', 'Five', '+0123456789');
 
 
 INSERT INTO account_settings(account_id, settings)
-VALUES (1, 'RESERVATION_REQUEST_NOTIFICATION'),
-       (1, 'RESERVATION_CANCEL_NOTIFICATION'),
-       (1, 'HOST_REVIEW_NOTIFICATION'),
-       (1, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
-       (2, 'RESERVATION_REQUEST_NOTIFICATION'),
-       (2, 'RESERVATION_CANCEL_NOTIFICATION'),
-       (2, 'HOST_REVIEW_NOTIFICATION'),
-       (2, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
-       (3, 'RESERVATION_REQUEST_NOTIFICATION'),
-       (3, 'RESERVATION_CANCEL_NOTIFICATION'),
-       (3, 'HOST_REVIEW_NOTIFICATION'),
-       (3, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
-       (4, 'RESERVATION_REQUEST_NOTIFICATION'),
-       (4, 'RESERVATION_CANCEL_NOTIFICATION'),
-       (4, 'HOST_REVIEW_NOTIFICATION'),
-       (4, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
-       (5, 'RESERVATION_REQUEST_NOTIFICATION'),
-       (5, 'RESERVATION_CANCEL_NOTIFICATION'),
-       (5, 'HOST_REVIEW_NOTIFICATION'),
-       (5, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
-       (6, 'RESERVATION_RESPONSE_NOTIFICATION'),
-       (7, 'RESERVATION_RESPONSE_NOTIFICATION'),
-       (8, 'RESERVATION_RESPONSE_NOTIFICATION'),
-       (9, 'RESERVATION_RESPONSE_NOTIFICATION'),
-       (10, 'RESERVATION_RESPONSE_NOTIFICATION');
+VALUES (7899013227156098000, 'RESERVATION_REQUEST_NOTIFICATION'),
+       (7899013227156098000, 'RESERVATION_CANCEL_NOTIFICATION'),
+       (7899013227156098000, 'HOST_REVIEW_NOTIFICATION'),
+       (7899013227156098000, 'ACCOMMODATION_REVIEW_NOTIFICATION');
+--        (2, 'RESERVATION_REQUEST_NOTIFICATION'),
+--        (2, 'RESERVATION_CANCEL_NOTIFICATION'),
+--        (2, 'HOST_REVIEW_NOTIFICATION'),
+--        (2, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
+--        (3, 'RESERVATION_REQUEST_NOTIFICATION'),
+--        (3, 'RESERVATION_CANCEL_NOTIFICATION'),
+--        (3, 'HOST_REVIEW_NOTIFICATION'),
+--        (3, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
+--        (4, 'RESERVATION_REQUEST_NOTIFICATION'),
+--        (4, 'RESERVATION_CANCEL_NOTIFICATION'),
+--        (4, 'HOST_REVIEW_NOTIFICATION'),
+--        (4, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
+--        (5, 'RESERVATION_REQUEST_NOTIFICATION'),
+--        (5, 'RESERVATION_CANCEL_NOTIFICATION'),
+--        (5, 'HOST_REVIEW_NOTIFICATION'),
+--        (5, 'ACCOMMODATION_REVIEW_NOTIFICATION'),
+--        (6, 'RESERVATION_RESPONSE_NOTIFICATION'),
+--        (7, 'RESERVATION_RESPONSE_NOTIFICATION'),
+--        (8, 'RESERVATION_RESPONSE_NOTIFICATION'),
+--        (9, 'RESERVATION_RESPONSE_NOTIFICATION'),
+--        (10, 'RESERVATION_RESPONSE_NOTIFICATION');
 
 
 -- Insert data into the accommodation table
 INSERT INTO accommodation (average_grade, cancellation_deadline, is_auto_approval, is_price_per_guest, max_guests,
                            min_guests, address_id, id, accommodation_type, description, name, status, host_id)
-VALUES (4.33, 7, true, true, 4, 1, 1, 1, 'Apartment', 'A cozy apartment', 'Cozy Apartment 1', 'Active', 1),
-       (4.0, 5, true, false, 2, 1, 2, 2, 'Room', 'Comfortable room with a view', 'Room with a View', 'Active', 2),
-       (4.0, 14, true, true, 6, 2, 3, 3, 'Hotel', 'Luxurious hotel with great amenities', 'Luxury Hotel', 'Pending', 3),
+VALUES (4.33, 7, true, true, 4, 1, 1, 1, 'Apartment', 'A cozy apartment', 'Cozy Apartment 1', 'Active', 7899013227156098000),
+       (4.0, 5, true, false, 2, 1, 2, 2, 'Room', 'Comfortable room with a view', 'Room with a View', 'Active', 7899013227156098000),
+       (4.0, 14, true, true, 6, 2, 3, 3, 'Hotel', 'Luxurious hotel with great amenities', 'Luxury Hotel', 'Pending', 7899013227156098000),
        (3.33, 10, false, true, 8, 4, 4, 4, 'Apartment', 'Spacious apartment for groups', 'Spacious Group Apartment',
-        'Inactive', 4),
-       (4.5, 3, true, false, 3, 1, 5, 5, 'Room', 'Charming room for a relaxing stay', 'Charming Room', 'Pending', 5);
+        'Inactive', 7899013227156098000),
+       (4.5, 3, true, false, 3, 1, 5, 5, 'Room', 'Charming room for a relaxing stay', 'Charming Room', 'Pending', 7899013227156098000);
 
 -- Insert data into the accommodation_amenities table
 INSERT INTO accommodation_amenities (accommodation_id, amenities)
@@ -147,11 +147,11 @@ VALUES (1, 'ap1.jpg'),
 
 -- Insert data into the guest_favorites table
 INSERT INTO guest_favorites (favorites_id, favorite_to_id)
-VALUES (1, 6),
-       (2, 7),
-       (3, 8),
-       (4, 9),
-       (5, 10);
+VALUES (1, 7899013227156098010),
+       (2, 7899013227156098010),
+       (3, 7899013227156098010),
+       (4, 7899013227156098010),
+       (5, 7899013227156098010);
 
 
 -- Insert data into the host_host_reviews table
@@ -189,11 +189,11 @@ VALUES (1, null, 4, 'Approved', 6, 'Great host!', '2023-01-05 12:00:00'),
 -- Insert data into the reservation table
 INSERT INTO reservation (days, price, accommodation_id, guest_id, host_id, start_date, reservation_status,
                          number_of_guests, date_created)
-VALUES (2, 200.0, 1, 6, 1, '2023-01-05', 'Done', 2, '2023-01-01'),
-       (7, 560.0, 2, 7, 2, '2023-02-06', 'Denied', 1, '2023-01-01'),
-       (10, 1500.0, 3, 8, 3, '2023-03-07', 'Done', 3, '2023-01-01'),
-       (14, 1680.0, 4, 9, 4, '2023-04-08', 'Done', 4, '2023-01-01'),
-       (5, 450.0, 5, 10, 5, '2023-05-01', 'Denied', 3, '2023-01-01');
+VALUES (2, 200.0, 1, 7899013227156098010, 7899013227156098000, '2023-01-05', 'Done', 2, '2023-01-01'),
+       (7, 560.0, 2, 7899013227156098010, 7899013227156098000, '2023-02-06', 'Denied', 1, '2023-01-01'),
+       (10, 1500.0, 3, 7899013227156098010, 7899013227156098000, '2023-03-07', 'Done', 3, '2023-01-01'),
+       (14, 1680.0, 4, 7899013227156098010, 7899013227156098000, '2023-04-08', 'Done', 4, '2023-01-01'),
+       (5, 450.0, 5, 7899013227156098010, 7899013227156098000, '2023-05-01', 'Denied', 3, '2023-01-01');
 
 /*-- Insert data into the report table
 INSERT INTO report (author_id, date, reported_user_id, reason)
