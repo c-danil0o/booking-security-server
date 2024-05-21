@@ -22,8 +22,6 @@ public abstract class GuestMapper {
         if (guestDto.getId()!= null && !guestRepository.existsById(guestDto.getId())){
             Guest guest = new Guest();
             guest.setRole(Role.Guest);
-            guest.setEmail(guestDto.getEmail());
-            guest.setBlocked(guestDto.isBlocked());
             guest.setAddress(new Address(null, guestDto.getAddress().getStreet(), guestDto.getAddress().getCity(), guestDto.getAddress().getNumber(),guestDto.getAddress().getCountry(), guestDto.getAddress().getLatitude(), guestDto.getAddress().getLongitude()));
             guest.setFirstName(guestDto.getFirstName());
             guest.setLastName(guestDto.getLastName());
@@ -40,9 +38,8 @@ public abstract class GuestMapper {
 
     public Guest fromRegistrationDto(RegistrationDto registrationDto){
         Guest guest = new Guest();
-        guest.setEmail(registrationDto.getEmail());
+        guest.setId(registrationDto.getId());
         guest.setSettings(new HashSet<>(List.of(Settings.RESERVATION_RESPONSE_NOTIFICATION)));
-        guest.setPassword(registrationDto.getPassword());
         guest.setPhone(registrationDto.getPhone());
         guest.setAddress(new Address(null, registrationDto.getAddress().getStreet(), registrationDto.getAddress().getCity(), registrationDto.getAddress().getNumber(),registrationDto.getAddress().getCountry(), null, null));
         guest.setFirstName(registrationDto.getFirstName());

@@ -215,7 +215,7 @@ public class ReservationServiceImpl implements ReservationService {
         Account guest = accountService.findModelById(reservation.getGuestId());
         if (guest.getSettings().contains(Settings.RESERVATION_RESPONSE_NOTIFICATION)){
             StringBuilder mess = new StringBuilder();
-            mess.append("Host ").append(accountService.findModelById(reservation.getHostId()).getEmail()).append(" has approved your reservation request!");
+            mess.append("Host ").append(accountService.findModelById(reservation.getHostId()).getId()).append(" has approved your reservation request!");
             Notification notification = new Notification(null, mess.toString(), LocalDateTime.now(),guest);
             notificationService.saveAndSendNotification(notification);
         }
@@ -288,7 +288,7 @@ public class ReservationServiceImpl implements ReservationService {
         Account guest = accountService.findModelById(reservation.getGuestId());
         if (guest.getSettings().contains(Settings.RESERVATION_RESPONSE_NOTIFICATION)){
             StringBuilder mess = new StringBuilder();
-            mess.append("Host ").append(accountService.findModelById(reservation.getHostId()).getEmail()).append(" has denied your reservation request!");
+            mess.append("Host ").append(accountService.findModelById(reservation.getHostId()).getId()).append(" has denied your reservation request!");
             Notification notification = new Notification(null, mess.toString(), LocalDateTime.now(),guest);
             notificationService.saveAndSendNotification(notification);
         }
@@ -347,7 +347,7 @@ public class ReservationServiceImpl implements ReservationService {
         Account host = accountService.findModelById(reservationDto.getHostId());
         if (host.getSettings().contains(Settings.RESERVATION_REQUEST_NOTIFICATION)) {
             StringBuilder mess = new StringBuilder();
-            mess.append("Guest ").append(accountService.findModelById(reservationDto.getGuestId()).getEmail()).append(" has created reservation request for your accommodation!");
+            mess.append("Guest ").append(accountService.findModelById(reservationDto.getGuestId()).getId()).append(" has created reservation request for your accommodation!");
             Notification notification = new Notification(null, mess.toString(), LocalDateTime.now(),host);
             notificationService.saveAndSendNotification(notification);
         }

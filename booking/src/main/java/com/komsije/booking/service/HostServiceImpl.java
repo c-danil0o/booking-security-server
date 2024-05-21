@@ -101,52 +101,19 @@ public class HostServiceImpl implements HostService {
 
 
     @Override
-    public String singUpUser(RegistrationDto registrationDto) {
-        Account account = accountRepository.getAccountByEmail(registrationDto.getEmail());
+    public Long singUpUser(RegistrationDto registrationDto) {
+        Account account = accountRepository.findById(registrationDto.getId()).orElse(null);
         Long id;
         if (account == null) {
-            String encodedPassword = passwordEncoder.encode(registrationDto.getPassword());
-            registrationDto.setPassword(encodedPassword);
             Host host = mapper.fromRegistrationDto(registrationDto);
             hostRepository.save(host);
             id = host.getId();
-        } else if (account.isActivated() || account.isBlocked()) {
+        } else {
             throw new EmailAlreadyExistsException("Email already exists!");
-        } else
-            id = account.getId();
 
-        String token = UUID.randomUUID().toString();
-        LocalDateTime expiration = LocalDateTime.now().plusHours(24);
-        ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), expiration, accountRepository.findById(id).orElseGet(null));
-
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
-        Runnable task1 = () -> deleteIfNotActivated(id);
-        this.taskScheduler.schedule(task1, expiration.toInstant(ZoneOffset.UTC));
-        return token;
-    }
-
-    private void deleteIfNotActivated(Long accountId) {
-        Account account = accountRepository.findById(accountId).orElse(null);
-        if (!account.isActivated()) {
-            accountRepository.delete(account);
         }
+        return id;
     }
 
-    @Override
-    public HostDto getByEmail(String email) throws ElementNotFoundException {
-        Host host = hostRepository.findByEmail(email);
-        if (host == null) {
-            throw new ElementNotFoundException("Account with given email doesn't exit!");
-        }
-        return mapper.toDto(host);
-    }
 
-    @Override
-    public Host getModelByEmail(String email) throws ElementNotFoundException {
-        Host host = hostRepository.findByEmail(email);
-        if (host == null) {
-            throw new ElementNotFoundException("Account with given email doesn't exit!");
-        }
-        return host;
-    }
 }

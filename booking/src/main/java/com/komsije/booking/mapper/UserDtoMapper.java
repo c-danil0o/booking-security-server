@@ -32,7 +32,6 @@ public abstract class UserDtoMapper {
 
     public UserDto toDto(Account account) throws ElementNotFoundException {
         UserDto userDto = new UserDto();
-        userDto.setEmail(account.getEmail());
         userDto.setAccountId(account.getId());
         if (account.getRole().equals(Role.Host)){
             Host host = hostRepository.getReferenceById(account.getId());
@@ -47,7 +46,7 @@ public abstract class UserDtoMapper {
     }
 
     public AccountDto fromDto(UserDto userDto) throws ElementNotFoundException {
-        return accountMapper.toDto(accountRepository.getAccountByEmail(userDto.getEmail()));
+        return accountMapper.toDto(accountRepository.getReferenceById(userDto.getAccountId()));
     }
     public Account fromDtoModel(UserDto userDto) throws ElementNotFoundException{
         return accountRepository.getReferenceById(userDto.getAccountId());

@@ -80,8 +80,8 @@ public abstract class ReservationMapper {
         reservationDto.setPrice(reservation.getPrice());
         Accommodation accommodation = reservation.getAccommodation();
         reservationDto.setAccommodationName(accommodation.getName()+" , "+ accommodation.getAddress().getCity());
-        reservationDto.setGuestEmail(guestRepository.getReferenceById(reservation.getGuestId()).getEmail());
-        reservationDto.setHostEmail(hostRepository.getReferenceById(reservation.getHostId()).getEmail());
+        reservationDto.setGuestEmail(guestRepository.getReferenceById(reservation.getGuestId()).getId().toString());
+        reservationDto.setHostEmail(hostRepository.getReferenceById(reservation.getHostId()).getId().toString());
         reservationDto.setAccommodationId(accommodation.getId());
         reservationDto.setHostId(reservation.getHostId());
         reservationDto.setGuestId(reservation.getGuestId());

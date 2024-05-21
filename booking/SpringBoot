@@ -410,79 +410,8 @@
   "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister" : false,
   "webAuthnPolicyPasswordlessAcceptableAaguids" : [ ],
   "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
-  "users" : [ {
-    "id" : "52525df6-0149-4bb2-9122-32e3e13e3217",
-    "username" : "host1",
-    "firstName" : "",
-    "lastName" : "",
-    "email" : "host1@example.com",
-    "emailVerified" : true,
-    "attributes" : {
-      "LDAP_ENTRY_DN" : [ "uid=host1,ou=Groups,dc=mycompany,dc=com" ],
-      "LDAP_ID" : [ "bb6503ce-aa2e-103e-996b-1f833b48f942" ],
-      "modifyTimestamp" : [ "20240519133831Z" ],
-      "createTimestamp" : [ "20240519132332Z" ]
-    },
-    "createdTimestamp" : 1716125012018,
-    "enabled" : true,
-    "totp" : false,
-    "federationLink" : "dd1dcc05-bbe6-4330-9249-0faf511dd0b9",
-    "credentials" : [ ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-springboot" ],
-    "clientRoles" : {
-      "login-app" : [ "USER" ]
-    },
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
-    "id" : "70248084-60b3-4160-95a2-6b2242e89ef2",
-    "username" : "vladimir",
-    "firstName" : "Vladimir",
-    "lastName" : "Cornenki",
-    "email" : "vladimir@gmail.com",
-    "emailVerified" : true,
-    "attributes" : {
-      "LDAP_ENTRY_DN" : [ "uid=vladimir,ou=Groups,dc=mycompany,dc=com" ],
-      "LDAP_ID" : [ "fbc5766c-aa2c-103e-996a-1f833b48f942" ],
-      "modifyTimestamp" : [ "20240519131611Z" ],
-      "createTimestamp" : [ "20240519131101Z" ]
-    },
-    "createdTimestamp" : 1716124261031,
-    "enabled" : true,
-    "totp" : false,
-    "federationLink" : "dd1dcc05-bbe6-4330-9249-0faf511dd0b9",
-    "credentials" : [ ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ "UPDATE_PASSWORD" ],
-    "realmRoles" : [ "default-roles-springboot" ],
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
-    "id" : "5bf3e062-51ea-4023-a9c8-ea5b2306dc23",
-    "username" : "yorage7771@fincainc.com",
-    "firstName" : "aaa",
-    "lastName" : "aaa",
-    "email" : "yorage7771@fincainc.com",
-    "emailVerified" : true,
-    "attributes" : {
-      "LDAP_ENTRY_DN" : [ "uid=yorage7771@fincainc.com,ou=Groups,dc=mycompany,dc=com" ],
-      "LDAP_ID" : [ "7540e8ca-aafd-103e-9321-a78d0f47ff82" ],
-      "modifyTimestamp" : [ "20240520140320Z" ],
-      "createTimestamp" : [ "20240520140320Z" ]
-    },
-    "createdTimestamp" : 1716213800158,
-    "enabled" : true,
-    "totp" : false,
-    "federationLink" : "dd1dcc05-bbe6-4330-9249-0faf511dd0b9",
-    "credentials" : [ ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-springboot" ],
-    "notBefore" : 0,
-    "groups" : [ ]
-  } ],
+  "users" : [
+   ],
   "scopeMappings" : [ {
     "clientScope" : "offline_access",
     "roles" : [ "offline_access" ]

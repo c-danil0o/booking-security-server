@@ -8,6 +8,4 @@ import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findAccountByRole(Role type);
-    List<Account> findAccountByIsBlocked(boolean isBlocked);
-    Account getAccountByEmail(String email);
 }

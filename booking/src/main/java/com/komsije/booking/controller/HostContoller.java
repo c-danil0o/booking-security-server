@@ -54,11 +54,6 @@ public class HostContoller {
         return new ResponseEntity<>(host, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/email", consumes = "application/json")
-    public ResponseEntity<HostDto> getByEmail(@Valid @RequestBody EmailDto emailDto) {
-        HostDto hostDto = hostService.getByEmail(emailDto.getEmail());
-        return new ResponseEntity<>(hostDto, HttpStatus.CREATED);
-    }
 
 
 }

@@ -73,76 +73,10 @@ public class AccountServiceImpl implements AccountService{
         return mapper.toDto(accountRepository.findAccountByRole(type));
     }
 
-    public List<AccountDto> getBlockedAccounts() {
-        return mapper.toDto(accountRepository.findAccountByIsBlocked(true));
-    }
 
-    @Override
-    public AccountDto getByEmail(String email) throws ElementNotFoundException {
-        Account account = accountRepository.getAccountByEmail(email);
-        if (account == null){
-            throw new ElementNotFoundException("Account with given email doesn't exit!");
-        }
-        return mapper.toDto(account);
-    }
-    @Override
-    public Account getModelByEmail(String email) throws ElementNotFoundException {
-        Account account = accountRepository.getAccountByEmail(email);
-        if (account == null){
-            throw new ElementNotFoundException("Account with given email doesn't exit!");
-        }
-        return account;
-    }
-    @Override
-    public String getEmail(Long id){
-        Account account = accountRepository.findById(id).orElseThrow();
-        return account.getEmail();
-    }
 
-    @Override
-    public AccountDto checkLoginCredentials(LoginDto loginDto) throws ElementNotFoundException, AccountNotActivatedException, IncorrectPasswordException {
-        Account account = accountRepository.getAccountByEmail(loginDto.getEmail());
-        if (account == null){
-            throw new ElementNotFoundException("Account with given email doesn't exist!");
-        }
-        if (!account.isActivated()){
-            throw new AccountNotActivatedException("Account exists but it is not activated!");
-        }
-        if (account.getPassword().equals(loginDto.getPassword())){
-            return mapper.toDto(account);
-        }else{
-            throw new IncorrectPasswordException("Given password is not valid!");
-        }
 
-    }
 
-    @Override
-    public void activateAccount(String email) {
-        Account account = accountRepository.getAccountByEmail(email);
-        account.setActivated(true);
-        accountRepository.save(account);
-    }
-
-    @Override
-    public void changePassword(NewPasswordDto newPasswordDto) throws ElementNotFoundException, IncorrectPasswordException {
-        Account account = accountRepository.getAccountByEmail(newPasswordDto.getEmail());
-        if (account==null)
-            throw new ElementNotFoundException("Account with given email doesn't exist!");
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        if (!passwordEncoder.matches(newPasswordDto.getOldPassword(), account.getPassword()))
-            throw new IncorrectPasswordException("Old password is incorrect");
-        account.setPassword(passwordEncoder.encode(newPasswordDto.getNewPassword()));
-        accountRepository.save(account);
-    }
-
-    @Override
-    public void blockAccount(Long id) {
-        Account account = accountRepository.getReferenceById(id);
-        account.setBlocked(true);
-        accountRepository.save(account);
-        deleteReports(id);
-        deleteReservations(id);
-    }
 
     private void deleteReports(Long userId){
         List<Report> reports = reportRepository.findAll();

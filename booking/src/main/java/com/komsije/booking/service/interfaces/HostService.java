@@ -7,7 +7,5 @@ import com.komsije.booking.model.Host;
 import com.komsije.booking.service.interfaces.crud.CrudService;
 
 public interface HostService extends CrudService<HostDto, Long> {
-    public String singUpUser(RegistrationDto registrationDto);
-    HostDto getByEmail(String email) throws ElementNotFoundException;
-    Host getModelByEmail(String email) throws ElementNotFoundException;
+    public Long singUpUser(RegistrationDto registrationDto);
 }

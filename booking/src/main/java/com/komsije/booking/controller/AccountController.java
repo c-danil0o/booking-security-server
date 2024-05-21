@@ -37,8 +37,6 @@ public class AccountController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
     private RegistrationServiceImpl registrationService;
     private final AccountService accountService;
 
@@ -71,20 +69,9 @@ public class AccountController {
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/accounts/email")
-    public ResponseEntity<AccountDto> getAccountByEmail(@Valid  @RequestBody EmailDto emailDto) {
 
-        AccountDto account = accountService.getByEmail(emailDto.getEmail());
-        return new ResponseEntity<>(account, HttpStatus.OK);
-    }
 
-    @PreAuthorize("hasRole('Admin')")
-    @GetMapping(value = "/accounts/blocked")
-    public ResponseEntity<List<AccountDto>> getBlockedAccounts() {
 
-        List<AccountDto> accounts = accountService.getBlockedAccounts();
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
-    }
 
 /*    @PostMapping(value = "/accounts/save", consumes = "application/json")
     public ResponseEntity<AccountDto> saveAccount(@RequestBody AccountDto accountDTO) {
@@ -92,12 +79,6 @@ public class AccountController {
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }*/
 
-    @PreAuthorize("hasRole('Admin')")
-    @PatchMapping(value = "/accounts/{id}/block")
-    public ResponseEntity<Void> blockAccount(@IdentityConstraint @PathVariable("id") Long id) {
-        this.accountService.blockAccount(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
     @DeleteMapping(value = "/accounts/{id}")
     public ResponseEntity<Void> deleteAccount(@IdentityConstraint @PathVariable Long id) {
@@ -106,29 +87,6 @@ public class AccountController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/login", consumes = "application/json")
-    public ResponseEntity<TokenDto> login(@Valid @RequestBody LoginDto loginDto) {
-        if (!this.accountService.getByEmail(loginDto.getEmail()).isActivated()){
-            throw new AccountNotActivatedException("Account is not activated!");
-        }
-        if (this.accountService.getByEmail(loginDto.getEmail()).isBlocked()){
-            throw new AccountBlockedException("Your account is blocked!");
-        }
-        UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(loginDto.getEmail(),
-                loginDto.getPassword());
-        Authentication auth = authenticationManager.authenticate(authReq);
-
-        SecurityContext sc = SecurityContextHolder.getContext();
-        sc.setAuthentication(auth);
-
-        UserDetails userDetail = userDetailsService.loadUserByUsername(loginDto.getEmail());
-
-        String token = "";
-        TokenDto tokenDto = new TokenDto();
-        tokenDto.setToken(token);
-
-        return new ResponseEntity<>(tokenDto, HttpStatus.OK);
-    }
 
 
     @GetMapping(
@@ -157,14 +115,8 @@ public class AccountController {
     }
 
     @PostMapping(value = "/register", consumes = "application/json")
-    public ResponseEntity<TokenDto> register1(@RequestHeader(HttpHeaders.USER_AGENT) String agent, @Valid @RequestBody RegistrationDto registrationDto) {
-
-        if (agent.equals("Mobile-Android")) {
-            return new ResponseEntity<>(registrationService.registerAndroid(registrationDto), HttpStatus.OK);
-
-        } else {
-            return new ResponseEntity<>(registrationService.register(registrationDto), HttpStatus.OK);
-        }
+    public ResponseEntity<Long> register(@Valid @RequestBody RegistrationDto registrationDto) {
+        return new ResponseEntity<>(registrationService.register(registrationDto), HttpStatus.OK);
 
     }
 
@@ -173,12 +125,7 @@ public class AccountController {
         return new ResponseEntity<>(registrationService.confirmToken(token), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/passwordChange", consumes = "application/json")
-    public ResponseEntity<Void> changePassword(@Valid @RequestBody NewPasswordDto newPasswordDto) {
-        accountService.changePassword(newPasswordDto);
-        return new ResponseEntity<>(HttpStatus.OK);
 
-    }
 
 
 }

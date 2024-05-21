@@ -29,9 +29,6 @@ public abstract class AccountMapper {
         Account account = new Account();
 
         account.setId( accountDto.getId() );
-        account.setEmail( accountDto.getEmail() );
-        account.setBlocked( accountDto.isBlocked() );
-        account.setActivated( accountDto.isActivated() );
         account.setRole( accountDto.getRole() );
 
         return account;

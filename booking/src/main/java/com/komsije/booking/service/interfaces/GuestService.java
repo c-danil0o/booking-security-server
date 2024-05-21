@@ -15,9 +15,7 @@ import java.util.Set;
 public interface GuestService extends CrudService<GuestDto, Long> {
     public List<AccommodationDto> getFavoritesByGuestId(Long id) throws ElementNotFoundException;
     public List<AccommodationDto> addToFavorites(Long id, AccommodationDto accommodationDto) throws ElementNotFoundException;
-    public String singUpUser(RegistrationDto registrationDto);
-    public GuestDto getByEmail(String email) throws ElementNotFoundException;
-    public Guest getModelByEmail(String email) throws ElementNotFoundException;
+    public Long singUpUser(RegistrationDto registrationDto);
     public void increaseCancelations(Long id) throws ElementNotFoundException;
 
     boolean cancelReservationRequest(Long id) throws ElementNotFoundException, PendingReservationException;

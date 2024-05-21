@@ -70,7 +70,7 @@ public class ReviewServiceImpl implements ReviewService {
             Account host = accountService.findModelById(reviewDto.getHostId());
             if (host.getSettings().contains(Settings.HOST_REVIEW_NOTIFICATION)) {
                 StringBuilder mess = new StringBuilder();
-                mess.append("Guest ").append(accountService.findModelById(reviewDto.getAuthor().getAccountId()).getEmail()).append(" ").append(" has left a review for you!");
+                mess.append("Guest ").append(accountService.findModelById(reviewDto.getAuthor().getAccountId()).getId()).append(" ").append(" has left a review for you!");
                 Notification notification = new Notification(null, mess.toString(), LocalDateTime.now(), accountService.findModelById(reviewDto.getHostId()));
                 notificationService.saveAndSendNotification(notification);
             }
@@ -80,7 +80,7 @@ public class ReviewServiceImpl implements ReviewService {
             Account host = accommodationService.findModelById(reviewDto.getAccommodationId()).getHost();
             if (host.getSettings().contains(Settings.ACCOMMODATION_REVIEW_NOTIFICATION)) {
                 StringBuilder mess = new StringBuilder();
-                mess.append("Guest ").append(accountService.findModelById(reviewDto.getAuthor().getAccountId()).getEmail()).append(" has left a review for your accommodation!");
+                mess.append("Guest ").append(accountService.findModelById(reviewDto.getAuthor().getAccountId()).getId()).append(" has left a review for your accommodation!");
                 Notification notification = new Notification(null, mess.toString(), LocalDateTime.now(), host);
                 notificationService.saveAndSendNotification(notification);
             }

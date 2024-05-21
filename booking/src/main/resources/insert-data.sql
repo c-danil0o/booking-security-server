@@ -12,8 +12,8 @@ VALUES ('City1', '123', 'Street A', 45, 29, 'Serbia'),
        ('City10', '707', 'Street J', 45, 29, 'Serbia');
 
 -- Insert data into the account table for hosts
-INSERT INTO account (is_blocked, role, email, password, is_activated, alias, id)
-VALUES (false, 'Host', 'host1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '236bce8cd92a49fdab0da508f0188cd8', 7899013227156098000);
+INSERT INTO account ( role, alias, id)
+VALUES ('Host', '236bce8cd92a49fdab0da508f0188cd8', 7899013227156098000);
 --        (false, 'Host', 'host2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '9004bff2be114199b0e8d1c1c7c35313', 7899013227156098006),
 --        (false, 'Host', 'host3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, '06808871e946401c8f12d425a793b7e3', 7899013227156098007),
 --        (false, 'Host', 'host4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 'e323e7191af645c7ba7025e2ba3c25b8', 7899013227156098008),
@@ -28,8 +28,8 @@ VALUES (1, 7899013227156098000, 'Host', 'One', '+1234567890');
 --        (5, 7899013227156098009, 'Host', 'Five', '+5678901234');
 
 -- Insert data into the account table for guests
-INSERT INTO account (is_blocked, role, email, password, is_activated, id)
-VALUES (false, 'Guest', 'guest1@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098010);
+INSERT INTO account (role, id)
+VALUES ('Guest', 7899013227156098010);
 --        (false, 'Guest', 'guest2@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098020),
 --        (false, 'Guest', 'guest3@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098030),
 --        (false, 'Guest', 'guest4@example.com', '$2a$10$/UBsR5qdgZLV1WMm5FQ.h.v38vn3y0hF3gHJXKHb2dJ/.nJASvp72', true, 7899013227156098040),

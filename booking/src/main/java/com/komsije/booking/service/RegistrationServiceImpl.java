@@ -27,37 +27,13 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     AccountService accountService;
 
-    public TokenDto register(RegistrationDto registrationDto) {
-            String token = "";
+    public Long register(RegistrationDto registrationDto) {
             if (registrationDto.getRole() == Role.Guest) {
-                token = guestService.singUpUser(registrationDto);
+              return   guestService.singUpUser(registrationDto);
             } else if (registrationDto.getRole() == Role.Host) {
-                token = hostService.singUpUser(registrationDto);
+                return hostService.singUpUser(registrationDto);
             }
-            String link = "http://localhost:4200/registration-confirmation?token=" + token;
-            emailSenderService.send(
-                    registrationDto.getEmail(),
-                    buildEmail(registrationDto.getFirstName(), link));
-            TokenDto tokenDto = new TokenDto();
-            tokenDto.setToken(token);
-            return tokenDto;
-    }
-
-    public TokenDto registerAndroid(RegistrationDto registrationDto){
-        String token = "";
-        if (registrationDto.getRole() == Role.Guest) {
-            token = guestService.singUpUser(registrationDto);
-        } else if (registrationDto.getRole() == Role.Host) {
-            token = hostService.singUpUser(registrationDto);
-        }
-        String link = "http://localhost:8080/api/register/confirm?token=" + token;
-        emailSenderService.send(
-                registrationDto.getEmail(),
-                buildEmail(registrationDto.getFirstName(), link));
-        TokenDto tokenDto = new TokenDto();
-        tokenDto.setToken(token);
-        return tokenDto;
-
+            return -1L;
     }
 
     @Override
@@ -80,7 +56,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         confirmationTokenService.setConfirmedAt(token);
-        accountService.activateAccount(confirmationToken.getAccount().getEmail());
+//        accountService.activateAccount(confirmationToken.getAccount().getEmail());
         return "confirmed";
     }
 

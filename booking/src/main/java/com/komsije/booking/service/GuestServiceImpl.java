@@ -111,53 +111,19 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public String singUpUser(RegistrationDto registrationDto) {
-        Account account = accountRepository.getAccountByEmail(registrationDto.getEmail());
+    public Long singUpUser(RegistrationDto registrationDto) {
+        Account account = accountRepository.findById(registrationDto.getId()).orElse(null);
         Long id;
         if (account == null) {
-            String encodedPassword = passwordEncoder.encode(registrationDto.getPassword());
-            registrationDto.setPassword(encodedPassword);
             Guest guest = mapper.fromRegistrationDto(registrationDto);
             guestRepository.save(guest);
             id = guest.getId();
-        } else if (account.isActivated() || account.isBlocked()) {
+        } else {
             throw new EmailAlreadyExistsException("Email already exists!");
-        } else
-            id = account.getId();
-
-        String token = UUID.randomUUID().toString();
-        LocalDateTime expiration = LocalDateTime.now().plusHours(24);
-        ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), expiration, accountRepository.findById(id).orElseGet(null));
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
-        Runnable task1 = () -> deleteIfNotActivated(id);
-        this.taskScheduler.schedule(task1, expiration.toInstant(ZoneOffset.UTC));
-        return token;
-    }
-
-    private void deleteIfNotActivated(Long accountId) {
-        Account account = accountRepository.findById(accountId).orElse(null);
-        if (!account.isActivated()) {
-            accountRepository.delete(account);
         }
+        return id;
     }
 
-    @Override
-    public GuestDto getByEmail(String email) throws ElementNotFoundException {
-        Guest guest = guestRepository.findByEmail(email);
-        if (guest == null) {
-            throw new ElementNotFoundException("Account with given email doesn't exit!");
-        }
-        return mapper.toDto(guest);
-    }
-
-    @Override
-    public Guest getModelByEmail(String email) throws ElementNotFoundException {
-        Guest guest = guestRepository.findByEmail(email);
-        if (guest == null) {
-            throw new ElementNotFoundException("Account with given email doesn't exit!");
-        }
-        return guest;
-    }
 
     @Override
     public void increaseCancelations(Long id) throws ElementNotFoundException {

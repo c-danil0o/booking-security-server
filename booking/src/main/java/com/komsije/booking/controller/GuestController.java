@@ -67,11 +67,6 @@ public class GuestController {
         return new ResponseEntity<>(guest, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/email", consumes = "application/json")
-    public ResponseEntity<GuestDto> getByEmail(@Valid @RequestBody EmailDto emailDto) {
-        GuestDto guestDto = guestService.getByEmail(emailDto.getEmail());
-        return new ResponseEntity<>(guestDto, HttpStatus.CREATED);
-    }
     @GetMapping(value = "/add-favorite")
     public ResponseEntity<Void> addFavorite(@IdentityConstraint @RequestParam Long guestId, @IdentityConstraint @RequestParam Long accommodationId){
         guestService.addFavorite(guestId, accommodationId);

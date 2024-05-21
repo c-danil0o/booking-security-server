@@ -18,14 +18,6 @@ import java.util.Set;
 public class Account {
     @Id
     private Long id;
-    @Column(nullable = false, unique = true)
-    private String email;
-    @Column(nullable = true)
-    private String password;
-    @Column(nullable = false)
-    private boolean isBlocked = false;
-    @Column(nullable = false)
-    private boolean isActivated = false;
     @Enumerated(EnumType.STRING)
     private Role role;
     @ElementCollection

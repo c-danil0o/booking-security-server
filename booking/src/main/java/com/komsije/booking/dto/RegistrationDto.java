@@ -8,10 +8,6 @@ import lombok.Data;
 
 @Data
 public class RegistrationDto {
-    @Email
-    private String email;
-    @NotEmpty
-    private String password;
     @NotNull
     private AddressDto address;
     @NotEmpty
@@ -22,4 +18,6 @@ public class RegistrationDto {
     private String phone;
     @NotNull
     private Role role;
+    @NotNull
+    private Long id;
 }

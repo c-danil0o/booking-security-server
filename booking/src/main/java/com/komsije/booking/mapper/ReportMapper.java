@@ -55,9 +55,8 @@ public abstract class ReportMapper {
         ReportViewDto reportViewDto = new ReportViewDto();
         reportViewDto.setId(report.getId());
         reportViewDto.setReason(report.getReason());
-        reportViewDto.setReportedUserEmail(report.getReportedUser().getEmail());
         reportViewDto.setReportedUserId(report.getReportedUser().getId());
-        reportViewDto.setAuthorEmail(report.getAuthor().getEmail());
+        reportViewDto.setAuthorEmail(report.getAuthor().getId().toString());
         reportViewDto.setDate(report.getDate());
         return reportViewDto;
     }
