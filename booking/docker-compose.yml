@@ -8,6 +8,7 @@ services:
     volumes:
       - ./src/main/resources/keycloak/keycloak.pem:/etc/x509/https/tls.crt
       - ./src/main/resources/keycloak/keycloakKey.pem:/etc/x509/https/tls.key
+      - ./src/main/resources/keycloak/passwords.txt:/opt/keycloak/data/password-blacklists/passwords.txt
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
