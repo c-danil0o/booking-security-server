@@ -3,6 +3,7 @@ package com.komsije.booking.controller;
 import com.komsije.booking.dto.*;
 import com.komsije.booking.exceptions.AccountBlockedException;
 import com.komsije.booking.exceptions.AccountNotActivatedException;
+import com.komsije.booking.exceptions.ElementNotFoundException;
 import com.komsije.booking.model.Role;
 import com.komsije.booking.service.RegistrationServiceImpl;
 import com.komsije.booking.service.interfaces.AccountService;
@@ -26,6 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.Element;
 import java.util.List;
 
 @RestController
@@ -60,6 +62,15 @@ public class AccountController {
     public ResponseEntity<AccountDto> getAccount(@IdentityConstraint  @PathVariable Long id) {
         AccountDto account = accountService.findById(id);
         return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+    @GetMapping(value = "/accounts/check/{id}")
+    public ResponseEntity<Boolean> checkAccount(@IdentityConstraint  @PathVariable Long id) {
+        try {
+            AccountDto account = accountService.findById(id);
+        }catch (ElementNotFoundException exception) {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('Admin')")
