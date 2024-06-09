@@ -2,8 +2,10 @@ package com.komsije.booking.security;
 
 
 import io.ous.jtoml.impl.Token;
+import jakarta.mail.Header;
 import jakarta.mail.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cglib.proxy.NoOp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -60,7 +62,13 @@ public class WebSecurityConfiguration {
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
-
+    @Bean
+    public FilterRegistrationBean<XSSFilter> filterRegistrationBean() {
+        FilterRegistrationBean<XSSFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new XSSFilter());
+        registrationBean.addUrlPatterns("/*");
+        return registrationBean;
+    }
     @Bean
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new RegisterSessionAuthenticationStrategy(sessionRegistry());
@@ -100,6 +108,7 @@ public class WebSecurityConfiguration {
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults());
+        http.headers(header -> header.contentSecurityPolicy(cs -> cs.policyDirectives("script-src 'self'; default-src 'self'")));
         return http.build();
     }
 //    @Bean
