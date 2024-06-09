@@ -35,6 +35,7 @@ public class AccommodationController {
         this.accommodationService = accommodationService;
     }
 
+    @PreAuthorize("hasRole('Admin')")
     @GetMapping(value = "/all")
     public ResponseEntity<List<AccommodationDto>> getAllAccommodations() {
         List<AccommodationDto> accommodations = accommodationService.findAll();
